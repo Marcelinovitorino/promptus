@@ -1,0 +1,57 @@
+<div class="container mt-5">
+    <!-- Mensagem de erro -->
+    {{#each erros}}
+        <div class="alert alert-danger">{{texto}}</div>
+    {{/each}}
+
+    <h2 class="mb-4 mt-5 text-center">Editar Terreno</h2>
+    <hr>
+
+    <form action="/admin/terreno/edit/{{terreno._id}}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" value="{{terreno._id}}" name="id">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título:</label>
+            <input type="text" class="form-control" name="titulo" placeholder="Digite o título do terreno" value="{{terreno.titulo}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição:</label>
+            <textarea class="form-control" name="descricao" rows="3" placeholder="Descreva o terreno" required>{{terreno.descricao}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="endereco" class="form-label">Endereço:</label>
+            <input type="text" class="form-control" name="endereco" placeholder="Digite o endereço do terreno" value="{{terreno.endereco}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="preco" class="form-label">Preço:</label>
+            <input type="number" class="form-control" name="preco" placeholder="Digite o preço do terreno" value="{{terreno.preco}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="area" class="form-label">Área:</label>
+            <input type="number" class="form-control" name="area" placeholder="Digite a área do terreno em m²" value="{{terreno.area}}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagens" class="form-label">Imagens:</label>
+            <input type="file" class="form-control" name="imagens" multiple>
+        </div>
+
+        <!-- Distritos -->
+        <div class="mb-3">
+            <label for="distrito" class="form-label">Distrito</label>
+            <select class="form-select" name="distrito" required>
+                <option value="" disabled>Selecione o Distrito</option>
+                {{#each distritos}}
+                    <option value="{{_id}}" {{#if (eq _id ../terreno.distrito)}}selected{{/if}}>{{this.nome}}</option>
+                {{else}}
+                    <option value="0">Nenhum Distrito cadastrado</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-5">Editar</button>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+<div class="container mt-4 mb-5">
+    <div class="row rounded shadow p-4">
+        <!-- Carrossel de Imagens -->
+        <div class="col-md-6">
+            <div id="carouselImovel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {{#each imovel.imagens}}
+                    <div class="carousel-item {{#if @first}}active{{/if}}">
+                        <img src="/{{this.path}}" class="d-block w-100 rounded" alt="{{this.filename}}">
+                    </div>
+                    {{/each}}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselImovel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselImovel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Detalhes do Imóvel -->
+        <div class="col-md-6">
+            <h2>{{imovel.titulo}}</h2>
+            <p><strong>Preço:</strong> MZN {{imovel.preco}}</p>
+            <p><strong>Endereço:</strong> {{imovel.endereco}}</p>
+            <p><strong>Descrição:</strong> {{imovel.descricao}}</p>
+
+            <!-- Criado em -->
+            <p><strong>Data de criação:</strong> {{imovel.createdAt}}</p>
+        </div>
+    </div>
+
+    <!-- Botão para voltar alinhado à direita -->
+    <div class="d-flex justify-content-end mt-3">
+        <a href="/imoveis" class="btn btn-primary">Voltar</a>
+    </div>
+</div>

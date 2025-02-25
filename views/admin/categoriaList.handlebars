@@ -1,0 +1,50 @@
+<div class="container mb-5 pb-5">
+  <h1 class="text-primary mt-5"> <strong style="color:#00B5DE ;">Lista de Categorias</strong></h1>
+  <hr>
+  <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <a href="Categoria" class="btn btn-success ms-auto btn-explore">
+        <i class="fas fa-plus"></i>Adicionar Categoria
+        </a>
+    </div>
+    <!-- Tabela Responsiva com Ajustes para Tela Pequena -->
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-bordered align-middle" style="background-color: #4067B1;">
+        <thead class="table-dark" style="background-color: #365B8D;">
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Slug</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each categorias}}
+          <tr style="background-color: #4A74A1; color: white;">
+            <td>{{@index}}</td>
+            <td>{{nome}}</td>
+            <td>{{slug}}</td>
+            <td>
+              <div class="d-flex gap-2">
+                <a href="/admin/categoria/edit/{{_id}}" class="btn btn-warning btn-sm btn-explore">Editar</a>
+                <form action="/admin/categoria/deletar" method="post" class="m-0 p-0">
+                  <input type="hidden" name="id" value="{{_id}}">
+                  <button type="submit" class="btn btn-danger btn-sm btn-explore">Excluir</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<br>
+
+<br>
+
+<br>
+<br>

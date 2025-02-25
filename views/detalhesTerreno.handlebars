@@ -1,0 +1,41 @@
+<div class="container mt-4 mb-5">
+    <div class="row rounded shadow p-4">
+        <!-- Carrossel de Imagens -->
+        <div class="col-md-6">
+            <div id="carouselTerreno" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {{#each terreno.imagens}}
+                    <div class="carousel-item {{#if @first}}active{{/if}}">
+                        <img src="/{{this.path}}" class="d-block w-100 rounded" alt="{{this.filename}}">
+                    </div>
+                    {{/each}}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselTerreno" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselTerreno" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Detalhes do Terreno -->
+        <div class="col-md-6">
+            <h2>{{terreno.titulo}}</h2>
+                                <p><strong>Preço:</strong> MZN {{terreno.preco}}</p>
+                    <p><strong>Área:</strong> {{terreno.area}} m²</p>
+                    <p><strong>Descrição:</strong> {{ terreno.descricao }}</p>
+                    <p><strong>Endereço:</strong> {{terreno.endereco}}</p>
+
+            <!-- Criado em -->
+           <!-- <p><strong>Data de criação:</strong> {{terreno.createdAt}}</p>-->
+        </div>
+    </div>
+
+    <!-- Botão para voltar à lista principal de terrenos no canto inferior direito -->
+    <div class="d-flex justify-content-end mt-3">
+        <a href="/terrenos" class="btn btn-primary">Voltar</a>
+    </div>
+</div>

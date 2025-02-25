@@ -1,0 +1,65 @@
+<div class="container">
+    <h1 class="mt-3">Lista de Espaços</h1>
+    <hr>
+
+    <!-- Dropdown de seleção de distrito -->
+<div class="row mb-3">
+    <div class="d-flex justify-content-end mt-3">
+        <div>
+            <label for="distritoSelecionado" class="form-label">Escolha um distrito para filtrar os imóveis:</label>
+            <select class="form-select" id="distritoSelecionado" style="width: 300px;" onchange="redirecionarParaDistrito()">
+                <option value="" selected disabled>Selecione um distrito</option>
+                {{#each distritos}}
+                <option value="{{slug}}">{{this.nome}}</option>
+                {{else}}
+                <option value="0">Nenhum distrito cadastrado</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript para redirecionar -->
+<script>
+    function redirecionarParaDistrito() {
+        const select = document.getElementById('distritoSelecionado');
+        const slug = select.value;
+
+        if (slug) {
+            window.location.href = `/terrenos/${slug}`; // Rota dinâmica para o distrito
+        }
+    }
+</script>
+
+
+    <!-- Lista de Espaços -->
+    <div class="row">
+        {{#each terrenos}}
+        <div class="col-md-4 mb-4">
+            <div class="card d-flex flex-column" style="min-height: 400px;">
+                <div class="card-body d-flex flex-column">
+                    <a href="/terreno/{{this.id}}">
+                        <img 
+                            src="/{{this.imagens.[0].path}}" 
+                            alt="{{this.imagens.[0].filename}}" 
+                            class="img-fluid fixed-image rounded" 
+                            style="cursor: pointer; height: 200px; object-fit: cover; width: 100%;">
+                    </a>
+                    <h5 class="card-title mt-3">{{this.titulo}}</h5>
+                    <p><strong>Preço:</strong> MZN {{this.preco}}</p>
+                    <p><strong>Área:</strong> {{this.area}} m²</p>
+                    <p><strong>Descrição:</strong> {{truncate this.descricao 50}}</p>
+                    <p><strong>Endereço:</strong> {{this.endereco}}</p>
+                    
+                    {{#if this.categoria}}
+                        <p><strong>Categoria:</strong> {{this.categoria}}</p>
+                    {{/if}}
+                    
+                    <!-- Botão para ver mais detalhes -->
+                    <a href="/terreno/{{this.id}}" class="btn btn-primary mt-auto">Ver mais detalhes</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
