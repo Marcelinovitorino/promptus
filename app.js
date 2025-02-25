@@ -4,7 +4,7 @@ const session = require("express-session");
 const Handlebars = require("handlebars");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const mongodbSession = require("connect-mongodb-session")(session)
+const MongoDBStore = require('connect-mongodb-session')(require('express-session'));
 const admin = require("./routers/admin");
 const path = require("path");
 const upload = require("./config/multerConfig");
@@ -21,35 +21,34 @@ const Terreno = mongoose.model("terrenos");
 
 const app = express();
 
-const mongoUri ="mongodb://localhost:27017/promptus"
+const uri = 'mongodb+srv://promptus:promptusibm@cluster0.sei5e.mongodb.net/promptus'
 
-// Conexão com o MongoDB
-mongoose
-  .connect(mongoUri, {
-  })
-  .then(() => console.log("Conectado ao MongoDB"))
-  .catch((err) => console.error("Erro ao conectar:", err));
-  //conexao mongodb session
-const store = new mongodbSession({
-  uri: mongoUri,
-  collection: "mysessions"
+mongoose.connect(uri,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tls: true 
+})
+  .then(() => console.log('Conectado ao MongoDB!'))
+  .catch(err => console.error('Erro ao conectar ao MongoDB:', err));
+
+const store = new MongoDBStore({
+    uri: uri,
+    collection: 'sessions'
 });
 
-store.on("error", (error) => {
-  console.error("Erro no armazenamento de sessões:", error);
+store.on('error', function(error) {
+    console.error('Erro no armazenamento de sessões:', error);
 });
 
-
-// Configuração da Sessão e Flash
 app.use(session({
-    secret: "meu segredo",
+    secret: 'seuSegredoSeguro',
     resave: false,
     saveUninitialized: false,
-    store: store, // Verifique que a store está corretamente definida
+    store: store,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 dia
+        maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
-        secure: false // Mude para true em produção com HTTPS
+        secure: false
     }
 }));
 app.use(flash());
