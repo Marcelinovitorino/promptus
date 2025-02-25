@@ -1,8 +1,32 @@
 {
+  "name": "promptus",
+  "version": "1.0.0",
+  "description": "Projeto Express com autenticação e Handlebars",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
+    "connect-mongodb-session": "^5.0.0",
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
     "handlebars": "^4.7.8",
+    "mongoose": "^8.10.1",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.9"
   }
 }
