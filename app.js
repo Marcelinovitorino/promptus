@@ -252,7 +252,7 @@ app.use(express.urlencoded({ extended: true })); // Para interpretar dados de fo
 
 app.use("/admin", admin);
 // Iniciar o servidor
-const PORT = 5000;
+const PORT = process.env.PORT || 5900;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na URL: http://localhost:${PORT}`);
 });

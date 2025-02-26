@@ -539,9 +539,9 @@ router.get("/login",(req,res)=>{
 })
 
 //
-//router.get("/registrar",(req,res)=>{
-  //res.render("admin/registrar")
-//})
+router.get("/registrar",(req,res)=>{
+  res.render("admin/registrar")
+})
 router.post("/registrar", async (req, res) => {
   try {
       const { username, email, password } = req.body;
@@ -582,6 +582,7 @@ router.post("/login", async (req, res) => {
 
     if (!user) {
       console.log("Usuário não encontrado!");
+      req.flash("error","Essas credenciais não correspondem aos nossos registros.")
       //req.flash("error","Email ou Senha incorretos!")
       return res.redirect("/admin/login");
     }
